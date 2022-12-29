@@ -1,0 +1,181 @@
+@import"https://fonts.googleapis.com/css2?family=Lato:ital, wght@0, 100;
+    0, 300;
+    0, 400;
+    0, 700;
+    0, 900;
+    1, 100;
+    1, 300;
+    1, 400;
+    1, 700;
+    1, 900&display=swap";
+    *, *: :after, *::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    outline: none;
+}
+i {
+    vertical-align: middle;
+}
+html {
+    font-size: 62.5%;
+    font-family: Lato;
+    scroll-behavior: smooth;
+}
+body {
+    font-size: 1.5rem;
+    font-family: Lato, Geneva, Tahoma, sans-serif;
+}
+p, span, div, li, a button, span, input[type=text]::placeholder {
+    font-family: inherit;
+}
+button {
+    cursor: pointer;
+    font-family: inherit;
+}
+ul {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding-left: 3%;
+    padding-right: 3%}
+.flex {
+    display: flex;
+    align-items: center;
+}
+.flex-direction-column {
+    flex-direction: column;
+}
+.flex-direction-row {
+    flex-direction: row;
+}
+.justify-content-space-between {
+    justify-content: space-between;
+}
+.justify-content-space-around {
+    justify-content: space-around;
+}
+.justify-content-center {
+    justify-content: center;
+}
+.justify-content-flex-start {
+    justify-content: flex-start;
+}
+.align-items-baseline {
+    align-items: baseline;
+}
+.align-items-center {
+    align-items: center;
+}
+.align-items-flex-end {
+    align-items: flex-end;
+}
+.align-items-flex-start {
+    align-items: flex-start;
+}
+.gap-1 {
+    gap: 1rem;
+}
+.gap-2 {
+    gap: 2rem;
+}
+.gap-3 {
+    gap: 3rem;
+}
+.gap-4 {
+    gap: 4rem;
+}
+.gride {
+    display: grid;
+}
+.w-100 {
+    width: 100%}
+body .none {
+    display: none;
+}
+body .block {
+    display: block;
+}
+body #main {
+    padding: 3%}
+body #main .cards {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill,  minmax(30rem,  1fr));
+    gap: 3rem;
+}
+body #main .cards__card {
+    border-radius: 1rem;
+    box-shadow: inset 0 0 0 .2rem #c56cf0;
+    overflow: hidden;
+    padding: 1.5rem;
+}
+body #main .cards__card img {
+    width: 100%;
+    border-radius: .5rem;
+}
+body #main .cards__card__details {
+    margin: 1rem 0;
+}
+body #main .cards__card__details__name {
+    font-weight: 600;
+    margin: .5rem 0;
+    color: #000;
+}
+body #main .cards__card__details__season {
+    background-color: #c56cf0;
+    color: #fff;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    margin: .5rem 0;
+    font-size: 1.3rem;
+}
+body #main .cards__card summary p {
+    color: #3d3d3d;
+    font-size: 1.3rem;
+    height: 6rem;
+    opacity: .8;
+    font-weight: 700;
+    line-height: 2rem;
+    overflow: hidden;
+    line-break: auto;
+}
+body #main .form {
+    margin: 2rem 0;
+    width: 50%;
+    margin: 0 auto;
+    box-shadow: inset 0 0 0 .2rem #c56cf0;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+body #main .form__search {
+    border: 1px solid #bdc3c7;
+    width: fit-content;
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+}
+body #main .form__search #search {
+    border: none;
+    color: #bdc3c7;
+    font-size: 1.3rem;
+}
+body #main .form__filter select {
+    border: 1px solid #bdc3c7;
+    width: fit-content;
+    padding: .5rem 1rem;
+    border-radius: 1rem;
+    font-size: 1.3rem;
+}
+.block {
+    display: block;
+}
+.none {
+    display: none;
+}
+/*# sourceMappingURL=main.min.css.map */
