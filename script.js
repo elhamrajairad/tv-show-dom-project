@@ -2,6 +2,7 @@
 const cardsEl = document.querySelector(".cards");
 const searchEl = document.getElementById("search");
 const filterEl = document.getElementById("filter");
+const searchInfo = document.querySelector(".form__info");
 //global variable:
 const filterResponse = {
   search: "",
@@ -73,6 +74,11 @@ sendRequest().then((data) => {
         episod.parentElement.parentElement.parentElement.classList.add("none");
       }
       if (episod.textContent.slice(2, 3) === filterResponse.filter) {
+        episod.parentElement.parentElement.parentElement.classList.remove(
+          "none"
+        );
+      }
+      if (filterResponse.filter === "0") {
         episod.parentElement.parentElement.parentElement.classList.remove(
           "none"
         );
