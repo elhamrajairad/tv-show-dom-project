@@ -2,16 +2,20 @@
 const cardsEl = document.querySelector(".cards");
 const searchEl = document.getElementById("search");
 const filterEl = document.getElementById("filter");
-const searchInfo = document.querySelector(".form__info");
+const searchCountEl = document.querySelector(".form__count__result");
 //global variable:
+let episodes = [];
+const URL = "https://api.tvmaze.com/shows/5/episodes";
+
 const filterResponse = {
   search: "",
   filter: "",
 };
 // render data to DOM:
 function renderData(data) {
-  data.map((item) => {
-    cardsEl.innerHTML += `<a href="${item.url}" class="${item.name}">
+  const result = data
+    .map((item) => {
+      return `<a href="${item.url}" class="${item.name}">
       <div class="cards__card">
                   <img src="${item.image.medium}"
                       alt="${item.name}">
@@ -25,64 +29,57 @@ function renderData(data) {
                           ? "0" + item.season
                           : item.season
                       }E${
-      item.number.toString().length === 1 ? "0" + item.number : item.number
-    }</span>
+        item.number.toString().length === 1 ? "0" + item.number : item.number
+      }</span>
                   </div>
                   <summary>${item.summary}</summary>
                   </div>
       </a>`;
-  });
+    })
+    .join("");
+  cardsEl.innerHTML = result;
 }
 // send request to API:
 async function sendRequest() {
-  const response = await fetch("https://api.tvmaze.com/shows/5/episodes");
-  if (!response.status === 200) {
-    throw "Error";
-  } else {
-    const responseJson = await response.json();
-    return responseJson;
+  const response = await fetch(URL);
+  try {
+    episodes = await response.json();
+    renderData(episodes);
+  } catch (error) {
+    console.log(error);
   }
 }
-// fetchData:
-sendRequest().then((data) => {
-  renderData(data);
-  const cards = cardsEl.childNodes;
-  // search Data
-  searchEl.addEventListener("input", (e) => {
-    filterResponse.search = e.target.value;
-    cards.forEach((episod) => {
-      if (
-        !episod.className
-          .toLowerCase()
-          .includes(filterResponse.search.toLowerCase())
-      ) {
-        episod.classList.add("none");
-      }
-      if (!filterResponse.search) {
-        episod.classList.remove("none");
-      }
-    });
+// search data:
+searchEl.addEventListener("input", (e) => {
+  filterResponse.search = e.target.value;
+  const filterSearch = episodes.filter((film) => {
+    return (
+      film.name.toLowerCase().includes(filterResponse.search.toLowerCase()) ||
+      film.summary.toLowerCase().includes(filterResponse.search.toLowerCase())
+    );
   });
-  // select season
-  const seasonDetails = document.querySelectorAll(
-    ".cards__card__details__season"
-  );
-  filterEl.addEventListener("change", (e) => {
-    filterResponse.filter = e.target.value;
-    seasonDetails.forEach((episod) => {
-      if (!(episod.textContent.slice(2, 3) === filterResponse.filter)) {
-        episod.parentElement.parentElement.parentElement.classList.add("none");
-      }
-      if (episod.textContent.slice(2, 3) === filterResponse.filter) {
-        episod.parentElement.parentElement.parentElement.classList.remove(
-          "none"
-        );
-      }
-      if (filterResponse.filter === "0") {
-        episod.parentElement.parentElement.parentElement.classList.remove(
-          "none"
-        );
-      }
-    });
-  });
+  renderData(filterSearch);
+  if (filterSearch.length > 0) {
+    searchCountEl.textContent = `${filterSearch.length} items found 😍`;
+  } else {
+    searchCountEl.textContent = `not found 🙄`;
+  }
+  if (filterResponse.search == "") {
+    searchCountEl.textContent = "";
+  }
 });
+// filter episod:
+filterEl.addEventListener("change", (e) => {
+  filterResponse.filter = e.target.value;
+  const result = episodes.filter((film) => {
+    if (filterResponse.filter == 0) {
+      return true;
+    } else {
+      return film.season == filterResponse.filter;
+    }
+  });
+  renderData(result);
+});
+
+// fetch data:
+sendRequest();
